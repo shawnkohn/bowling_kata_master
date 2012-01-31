@@ -13,16 +13,20 @@ describe Game do
 		end
 		
 		it "score is 0 for an all gutter game" do
-			20.times { @game.roll(0) }
+			rollMany(20, 0)
 			@game.score.should == 0
 		end
 
 		it "score is 20 for rolling all ones" do
-			20.times { @game.roll(1) }
+			rollMany(20, 1)
 			@game.score.should == 20 
 		end
 
-		#it "score is 16 for rolling one spare (5, 5, 3)" do
-		#end
+		it "score is 16 for rolling one spare (5, 5, 3)" do
+			rollMany(2, 5)
+			@game.roll(3)
+			rollMany(17, 0)
+			@game.score.should == 16
+		end
 	end
 end
