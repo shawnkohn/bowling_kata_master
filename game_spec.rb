@@ -9,5 +9,11 @@ describe Game do
 			20.times { game.roll(0) }
 			game.score.should == 0
 		end
+
+		it "score is 20 for rolling all ones" do
+			game = Game.new
+			20.times { game.roll(1) }
+			game.score.should == 0
+		end
 	end
 end
