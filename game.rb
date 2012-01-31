@@ -15,18 +15,40 @@ class Game
 		numFrames = 10
 		frameIndex = 0
 		(1..numFrames).each do
-			if @rolls[frameIndex] == 10
-				totalScore += @rolls[frameIndex] + @rolls[frameIndex+1] + @rolls[frameIndex+2]
+			if isStrike(frameIndex)
+				totalScore += 10 + strikeBonus(frameIndex)
 				frameIndex += 1
-			elsif @rolls[frameIndex] + @rolls[frameIndex+1] == 10 
-				totalScore += @rolls[frameIndex] + @rolls[frameIndex+1] + @rolls[frameIndex+2]
+			elsif isSpare(frameIndex) 
+				totalScore += 10 + spareBonus(frameIndex)
 				frameIndex +=2
 			else
-				totalScore += @rolls[frameIndex] + @rolls[frameIndex+1]
+				totalScore += normalFrameScore(frameIndex)
 				frameIndex += 2
 			end
 		end
 		totalScore
 	end
+
+	private 
+	def isStrike(frameIndex)
+		@rolls[frameIndex] == 10
+	end
+
+	def isSpare(frameIndex)
+		@rolls[frameIndex] + @rolls[frameIndex+1] == 10
+	end
+
+	def strikeBonus(frameIndex)
+		@rolls[frameIndex+1] + @rolls[frameIndex+2]
+	end
+
+	def spareBonus(frameIndex)
+		@rolls[frameIndex+2]
+	end
+
+	def normalFrameScore(frameIndex)
+		@rolls[frameIndex] + @rolls[frameIndex+1]
+	end
+
 
 end
