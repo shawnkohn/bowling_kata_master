@@ -12,21 +12,29 @@ describe Game do
 			(1..rolls).each { @game.roll(pins) }
 		end
 		
-		it "score is 0 for an all gutter game" do
+		it "test all gutter game" do
 			rollMany(20, 0)
 			@game.score.should == 0
 		end
 
-		it "score is 20 for rolling all ones" do
+		it "test rolling all ones" do
 			rollMany(20, 1)
 			@game.score.should == 20 
 		end
 
-		it "score is 16 for rolling one spare (5, 5, 3)" do
+		it "test rolling one spare" do
 			rollMany(2, 5)
 			@game.roll(3)
 			rollMany(17, 0)
 			@game.score.should == 16
+		end
+
+		it "test rolling one strike" do
+			@game.roll(10)
+			@game.roll(3)
+			@game.roll(4)
+			rollMany(16, 0)
+			@game.score.should == 24
 		end
 	end
 end
